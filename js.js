@@ -1,4 +1,4 @@
-/*globals CellPhone, Generator*/
+/*globals CellPhone, Generator, Microphone, Visualizer*/
 'use strict'
 
 var phone = new CellPhone(document.getElementById('canvas')),
@@ -6,7 +6,8 @@ var phone = new CellPhone(document.getElementById('canvas')),
 	highF = [1209, 1336, 1477],
 	keys = ['123', '456', '789', '*0#'],
 	gen = new Generator(lowF.concat(highF)),
-	fMap
+	microphone = new Microphone(),
+	visualizer, fMap
 
 fMap = (function () {
 	var map = Object.create(null),
@@ -19,10 +20,11 @@ fMap = (function () {
 	return map
 })()
 
-phone.onkeydown = function (key) {
-	gen.start(fMap[key][0])
-	gen.start(fMap[key][1])
+phone.onkeypress = function (key) {
+	gen.start(fMap[key][0], 200)
+	gen.start(fMap[key][1], 200)
 }
-phone.onkeyup = function (key) {
-	gen.stop()
-}
+
+visualizer = new Visualizer(document.getElementById('canvas2'), function () {
+	return microphone.getFrequencyData()
+})

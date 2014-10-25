@@ -25,9 +25,17 @@ function Generator(frequencies) {
 
 /**
  * @param {number} freq
+ * @param {number} [stop] - auto-stop it after the time in ms
  */
-Generator.prototype.start = function (freq) {
-	this.oscillators[freq].connect(this.context.destination)
+Generator.prototype.start = function (freq, stopTime) {
+	var oscillator = this.oscillators[freq],
+		that = this
+	oscillator.connect(this.context.destination)
+	if (stopTime) {
+		setTimeout(function () {
+			oscillator.disconnect(that.context.destination)
+		}, stopTime)
+	}
 }
 
 /**
