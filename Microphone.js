@@ -18,10 +18,6 @@ function Microphone() {
 
 	/** @member {AnalyserNode} */
 	this.analyser = this.context.createAnalyser()
-	this.analyser.fftSize = 1024
-	this.analyser.minDecibels = -90
-	this.analyser.maxDecibels = -10
-	this.analyser.smoothingTimeConstant = 0.85
 
 	/** @member {Uint8Array} */
 	this._data = new Uint8Array(this.analyser.frequencyBinCount)

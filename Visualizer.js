@@ -30,14 +30,20 @@ Visualizer.prototype._draw = function () {
 		w = this.canvas.width,
 		h = this.canvas.height,
 		x = 0,
-		dx, len, i, bh
+		dx, len, i, bh, r, g, b
 
 	len = data.length
-	cntxt.clearRect(0, 0, w, h)
+	console.log(len)
+	cntxt.fillStyle = 'rgba(255, 255, 255, .1)'
+	cntxt.fillRect(0, 0, w, h)
 	cntxt.moveTo(0, h / 2)
 	dx = w / len
 	for (i = 0; i < len; i++) {
 		bh = h * data[i] / 255
+		r = (data[i] + 256) / 2
+		g = 128 - data[i] / 4
+		b = 0
+		cntxt.fillStyle = 'rgb(' + (r | 0) + ', ' + (g | 0) + ', ' + (b | 0) + ')'
 		cntxt.fillRect(x, h - bh, dx, bh)
 		x += dx
 	}
