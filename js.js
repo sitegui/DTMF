@@ -28,3 +28,21 @@ phone.onkeypress = function (key) {
 visualizer = new Visualizer(document.getElementById('canvas2'), function () {
 	return microphone.getFrequencyData()
 })
+
+var fileInput = document.getElementById('file')
+fileInput.onchange = function () {
+	var file = fileInput.files[0],
+		fileReader = new FileReader()
+	fileReader.readAsArrayBuffer(file)
+	fileReader.onload = function () {
+		var audioEl = document.createElement('audio'),
+			blob = new Blob([fileReader.result])
+		audioEl.src = URL.createObjectURL(blob)
+		document.body.appendChild(audioEl)
+		audioEl.play()
+
+	}
+	fileReader.onerror = function () {
+		alert('Can\'t read file')
+	}
+}
