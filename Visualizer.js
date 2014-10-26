@@ -32,9 +32,8 @@ Visualizer.prototype._draw = function () {
 		x = 0,
 		dx, len, i, bh, r, g, b
 
-	len = data.length
-	console.log(len)
-	cntxt.fillStyle = 'rgba(255, 255, 255, .1)'
+	len = Math.floor(data.length / 4)
+	cntxt.fillStyle = 'white' //'rgba(255, 255, 255, .1)'
 	cntxt.fillRect(0, 0, w, h)
 	cntxt.moveTo(0, h / 2)
 	dx = w / len
