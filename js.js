@@ -111,7 +111,7 @@ function freqIndexFromMax(max, array) {
  * @returns {number} - fft index
  */
 function freqToDisc(freq) {
-	return Math.round(freq * analyser.frequencyBinCount / audioCtx.sampleRate)
+	return Math.round(freq * analyser.fftSize / audioCtx.sampleRate)
 }
 
 /**
@@ -119,7 +119,7 @@ function freqToDisc(freq) {
  * @returns {number} - frequency in Hz
  */
 function discToFreq(k) {
-	return Math.round(k * audioCtx.sampleRate / analyser.frequencyBinCount)
+	return Math.round(k * audioCtx.sampleRate / analyser.fftSize)
 }
 
 /**
